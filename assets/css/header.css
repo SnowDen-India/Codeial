@@ -1,0 +1,43 @@
+#header {
+  width: 100vw;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+}
+
+#header #logo {
+  width: 10%;
+  height: 40px;
+  margin-top: 2px;
+  padding: 0;
+  margin-left: 10px;
+}
+
+#header h1 {
+  margin-top: -4px;
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: white;
+}
+
+#header #name-id {
+  height: 40px;
+  width: 19%;
+  margin-left: 72%;
+}
+
+#header li {
+  display: inline-block;
+}
+
+#header a {
+  text-decoration: none;
+}
+
+#header h3 {
+  margin-top: 6px;
+  font-family: sans-serif;
+  color: white;
+  margin-left: 4px;
+}

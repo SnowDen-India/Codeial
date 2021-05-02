@@ -1,14 +1,23 @@
 <html>
     <head>
        <title><%= title %></title>
+       <%- style %>
        <link rel="stylesheet" href="/css/layout.css">
+       <link rel="stylesheet" href="/css/profile.css">
+       <link rel="stylesheet" href="/css/header.css">
+       <link rel="stylesheet" href="/css/footer.css">
+       <script src="https://kit.fontawesome.com/ca207b44ca.js" crossorigin="anonymous"></script>
+     
     </head>
     <body>
         <%- include('_header');  %>
        
+        <main  id="layout-main">
              <%- body %>
-
+        
+            </main>
 
        <%- include('_footer'); %>
+    
     </body>
 </html>

@@ -1,0 +1,46 @@
+
+ 
+#footer{
+	height:80px;
+	width:100vw;
+ background-color: grey;
+	display:flex;
+   align-items: center;
+   position: relative;
+   bottom:0;
+
+
+#copyright{
+	height:60px;
+	width:300px;
+
+	align-content:center;
+
+}
+
+i{
+     margin-top:15px;
+}
+h3,h4,i{
+	display:inline-block;
+    color:white;
+}
+
+#profile-part{
+    height:57px;
+	width:150px;
+	margin-top:36px;
+	margin-left:10px;
+}
+#login-or-home,#sign-section{
+	 height:25px;
+	width:100px;
+
+}
+
+h4{
+	margin-top:-4px;
+	margin-left:8px;
+	font-size:1.2rem;
+}
+}

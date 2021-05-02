@@ -1,0 +1,42 @@
+#footer {
+  height: 80px;
+  width: 100vw;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+}
+
+#footer #copyright {
+  height: 60px;
+  width: 300px;
+  align-content: center;
+}
+
+#footer i {
+  margin-top: 15px;
+}
+
+#footer h3, #footer h4, #footer i {
+  display: inline-block;
+  color: white;
+}
+
+#footer #profile-part {
+  height: 57px;
+  width: 150px;
+  margin-top: 36px;
+  margin-left: 10px;
+}
+
+#footer #login-or-home, #footer #sign-section {
+  height: 25px;
+  width: 100px;
+}
+
+#footer h4 {
+  margin-top: -4px;
+  margin-left: 8px;
+  font-size: 1.2rem;
+}

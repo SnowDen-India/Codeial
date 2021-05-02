@@ -1,3 +1,59 @@
 <footer>
-    page footer
+    <div id="footer">
+        
+        <div id="copyright">
+            <i class="far fa-copyright"></i>
+            <h3>Sujeet Kumar.All Rights.Reserved</h3>
+        </div>
+        <% if(locals.user) {%>
+        <div id="profile-part">
+          
+            <div id="login-or-home">
+             <a href="/"> 
+               <h4>
+                Home
+              </h4>
+           </a>
+            </div>
+            <div id="sign-section">
+                <a href="/users/profile">
+                      <h4>profile</h4>
+               </a>
+            </div>
+            
+
+        </div>
+        <% }else{%>
+            <div id="profile-part">
+          
+                <div id="login-or-home">
+                 <a href="/"> 
+                   <h4>
+                    Home
+                  </h4>
+               </a>
+                </div>
+                <div id="sign-section">
+                    <a href="/users/sign-up">
+                          <h4>Sign Up</h4>
+                   </a>
+                </div>
+                
+    
+            </div>
+        
+        
+        
+        
+       <% }%> 
+
+
+
+
+
+    </div>
+
+
+
+
 </footer>
