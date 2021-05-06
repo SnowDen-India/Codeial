@@ -4,12 +4,15 @@ const User=require('../models/user');
 
 module.exports.profile = function(request, response){
 
-
-        return response.render('profile',{
-             title:'profile'
-
-        });
-
+          User.findById(request.params.id,function(error,user){
+                return response.render('profile',{
+                        title:'profile',
+                        profile_user:user
+           
+                   });
+           
+          });
+   
         // if(request.cookies.user_id){
         
         //         User.findById(request.cookies.user_id,function(error,user){
