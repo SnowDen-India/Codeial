@@ -3,7 +3,3 @@ body {
   /* text-align: center; */
   overflow-x: hidden;
 }
-
-body #layout-main {
-  height: auto;
-}
