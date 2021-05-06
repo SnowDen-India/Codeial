@@ -31,3 +31,24 @@ module.exports.create=function(request,response){
 
 
 }
+
+
+//deleting a comment 
+
+module.exports.destroy = function(request,response){
+            Comment.findById(request.params.id,function(error,comment){
+              
+                if(comment.user == request.user.id){
+                    let postId =comment.post;
+                      comment.remove();
+                     Post.findByIdAndUpdate(postId,{$pull:{comments:request.params.id}},function(error,post){
+                            return response.redirect('back');
+                    });
+                }else{
+                    return response.redirect('back');
+                }
+
+            });
+
+
+}
