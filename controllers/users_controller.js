@@ -128,53 +128,15 @@ module.exports.create=function(request,response){
 
 module.exports.createSession=function(request , response){
 
-
+request.flash('success','Logged in Successfully');
 return response.redirect('/');
-
-//stetps to authentication
-
-//1.find the user
-
-// User.findOne({email:request.body.email},function(error,user){
-//         if(error){
-//                 console.log('error in finding the user in signing in');
-//                 return;
-//         }
-
-//         //2.handle user found
-
-//        if(user){
-//        //2.1 handle password mismatch
-//        if(user.password!=request.body.password){
-//                return response.redirect('back');
-//        }
-
-//        //2.2 handle session creation
-
-//        response.cookie('user_id',user.id);
-//        return response.redirect('/users/profile');
-
-
-//        }else{
-//            //3 handle user not found :(
-
-//            return response.redirect('back');
-
-//        }
-
-
-
-//        });
-
-
-
-
 };
 
 
 
 module.exports.destroySession=function(request,response){
         request.logout();
+        request.flash('success',"You Have Logout SuccesFully!");
         return response.redirect('/');
 
 
@@ -191,8 +153,49 @@ module.exports.destroySession=function(request,response){
         //         return response.redirect('sign-in');
         // })
           
-
-
-
-
 }
+
+// module.exports.createSession=function(request , response){
+
+//         request.flash('success','Logged in Successfully');
+//         return response.redirect('/');
+        
+//         //stetps to authentication
+        
+//         //1.find the user
+        
+//         // User.findOne({email:request.body.email},function(error,user){
+//         //         if(error){
+//         //                 console.log('error in finding the user in signing in');
+//         //                 return;
+//         //         }
+        
+//         //         //2.handle user found
+        
+//         //        if(user){
+//         //        //2.1 handle password mismatch
+//         //        if(user.password!=request.body.password){
+//         //                return response.redirect('back');
+//         //        }
+        
+//         //        //2.2 handle session creation
+        
+//         //        response.cookie('user_id',user.id);
+//         //        return response.redirect('/users/profile');
+        
+        
+//         //        }else{
+//         //            //3 handle user not found :(
+        
+//         //            return response.redirect('back');
+        
+//         //        }
+        
+        
+        
+//         //        });
+        
+        
+        
+        
+//         };

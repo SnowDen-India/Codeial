@@ -16,6 +16,9 @@ const MongoStore =require('connect-mongodb-session')(session);
 
 const sassMiddleware = require('node-sass-middleware');
 
+const flash = require('connect-flash');
+const customMdware = require('./config/middleware');
+
 
 app.use(sassMiddleware({
 
@@ -43,7 +46,7 @@ app.use(expresslayouts);
 //static files firing
 app.use(express.static('./assets'));
 app.set('layout extractStyles',true);
-app.set('layout extractScript',true);
+app.set('layout extractScripts',true);
 
 //view engine
 
@@ -72,6 +75,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser); 
+
+app.use(flash());
+app.use(customMdware.setFlash);
 
 //routes
 app.use('/',require('./routes'));

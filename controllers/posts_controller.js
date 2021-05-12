@@ -2,19 +2,45 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 
 
-module.exports.create=function(request,response){
- Post.create({
-     content:request.body.content,
-     user:request.user._id,
- },function(error,post){
-      if(error){
-          console.log("error in creating a post");
-          return response.redirect('back');
-      }
-      return response.redirect('back');
-  });
+module.exports.create= async function(request,response){
+ try { 
+   let post= await Post.create({
+        content:request.body.content,
+        user:request.user._id,
+    });
+    
+     if(request.xhr){
+       return response.status(200).json({
+              data:{
+                  post:post
+              },
+               message:"Post created!"
+       });
+     }   
+
+flash('success','Post published!');
+         return response.redirect('back');
+ }catch(error){
+    request.flash('error',error);
+ }
+ 
+
 
 }
+
+// module.exports.create=function(request,response){
+//  Post.create({
+//     content:request.body.content,
+//     user:request.user._id,
+// },function(error,post){
+//      if(error){
+//          console.log("error in creating a post");
+//          return response.redirect('back');
+//      }
+//      return response.redirect('back');
+//  });
+
+// }
 
 module.exports.destroy = async function(request,response){
 
@@ -26,15 +52,18 @@ module.exports.destroy = async function(request,response){
             post.remove();
 
               await Comment.deleteMany({ post:request.params.id});
+              request.flash('success','Post and Assosicated Comment Deleted!');
               return response.redirect('back');   
        
             }else{
+                request.flash('error','You cannot delete the post')
                return response.redirect('back');
         }
 
 
     }catch(error){
-        console.log('Error',error);
+        // console.log('Error',error);
+        request.flash('Error',error);
         return;
     }
      
