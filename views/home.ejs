@@ -8,12 +8,12 @@
 
        <h4>Post</h4>
          <% if(locals.user){%>
-            <form action="/post/create" id="new-post-form" method="POST">
-            <textarea name="content"  cols="30" rows="3" placeholder="Type here"></textarea>
+            <form action="/posts/create" id="new-post-form" method="POST">
+            <textarea name="content"  cols="30" rows="3" placeholder="Type here" required></textarea>
             <input type="submit" value="Post">
             </form>
                <% } %>
-          <div id="posts-list-containter">
+          <div id="posts-list-container">
        
             <ul>
                <% for(post of posts) { %>
@@ -44,6 +44,7 @@
                 <% } %>
         </section>
  </div>
-  
+<!-- importing this script for creating the comments -->
+ <script src="/js/home_post_comments.js"></script> 
  <script src="/js/home_post.js"></script>
 

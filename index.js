@@ -39,12 +39,14 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
+//static files firing
+app.use(express.static('./assets'));
+//make the uploads path available to the browser
+app.use('/uploads',express.static(__dirname+'/uploads'));
 //layouts
 
 app.use(expresslayouts);
 
-//static files firing
-app.use(express.static('./assets'));
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 

@@ -10,6 +10,7 @@ module.exports.create= async function(request,response){
     });
     
      if(request.xhr){
+        post = await post.populate('user', 'name').execPopulate();
        return response.status(200).json({
               data:{
                   post:post
@@ -17,11 +18,13 @@ module.exports.create= async function(request,response){
                message:"Post created!"
        });
      }   
+     request.flash('success', 'Post published without ajax!');
+     return response.redirect('back');
 
-flash('success','Post published!');
-         return response.redirect('back');
  }catch(error){
     request.flash('error',error);
+    console.log(err);
+    return response.redirect('back');
  }
  
 
@@ -52,7 +55,19 @@ module.exports.destroy = async function(request,response){
             post.remove();
 
               await Comment.deleteMany({ post:request.params.id});
-              request.flash('success','Post and Assosicated Comment Deleted!');
+              if(request.xhr){
+                  return response.status(200).json({
+                      data:{
+                          post_id:request.params.id
+                      },
+                      message:"Post deleted"
+        
+                    
+                  });
+              } 
+            //    request.flash('success',message);
+            request.flash('success','Post and Assosicated Comment Deleted!');
+             
               return response.redirect('back');   
        
             }else{
@@ -64,7 +79,7 @@ module.exports.destroy = async function(request,response){
     }catch(error){
         // console.log('Error',error);
         request.flash('Error',error);
-        return;
+        return response.redirect('back');
     }
      
    

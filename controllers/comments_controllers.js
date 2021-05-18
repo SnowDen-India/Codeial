@@ -12,10 +12,24 @@ module.exports.create= async function(request,response){
                post:request.body.post,
                user:request.user._id
            });
+          
              
               post.comments.push(comment);
               post.save();
-              response.redirect('/');
+              if(request.xhr){
+                //Similar for comments to fetch the user's id!
+               comment =await comment.populate('user','name').execPopulate();
+                return response.status(200).json({
+                         data:{
+                           comment:comment
+                         },
+                         message:"Post created!"
+                 
+                });
+              }
+              request.flash('success', 'Comment Published! without ajaxxxx');
+               return response.redirect('back');
+            
            }
             
       }catch(error){
@@ -67,11 +81,24 @@ module.exports.destroy = async function(request,response){
                 let postId =comment.post;
                   comment.remove();
             let post =Post.findByIdAndUpdate(postId,{$pull:{comments:request.params.id}});
-                        return response.redirect('back');
-            }else{
-                return response.redirect('back');
-            }
-          }catch{
+                    // send the comment id which was deleted back to the views
+            if (request.xhr){
+              return response.status(200).json({
+                  data: {
+                      comment_id: request.params.id
+                  },
+                  message: "Post deleted"
+              });
+          }     
+
+          request.flash('success', 'Comment deleted!');
+
+          return response.redirect('/');
+      }else{
+          request.flash('error', 'Unauthorized');
+          return response.redirect('back');
+      }
+          }catch(error){
             console.log('Error',error);
             return;
           }
