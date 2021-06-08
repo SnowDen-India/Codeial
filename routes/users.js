@@ -6,6 +6,10 @@ router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
+router.get('/reset-password',usersController.reset);
+router.post('/forget-password',usersController.forget);
+router.get('/:id',usersController.resetform);
+router.post('/newpassword',usersController.newPassword);
 
 router.post('/create',usersController.create);
 router.post('/create-session',passport.authenticate(

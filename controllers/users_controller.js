@@ -1,7 +1,13 @@
 const User=require('../models/user');
 const fs = require('fs');
 const path = require('path');
-
+const { find, deleteOne } = require('../models/user');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const Token = require('../models/token');
+const forgetPassword= require('../mailers/forgotPassword');
+const nodeMailer = require('../config/nodemailer');
+const crypto = require('crypto');
 
 
 module.exports.profile = function(request, response){
@@ -129,6 +135,15 @@ module.exports.signIn=function(request,response){
 
 
 }
+
+module.exports.reset= function(request,response)
+{
+        return response.render("reset_password",{
+                title:"Reset Password"
+        })
+}
+
+
 // get the sign up data
 module.exports.create=function(request,response){
 
@@ -196,6 +211,50 @@ module.exports.destroySession=function(request,response){
           
 }
 
+//sending email for reset password
+
+module.exports.forget=  async function(request,response){
+          console.log(request.body);
+       try{
+        let user= await User.findOne({email:request.body.email});
+       
+        if(!user){
+                console.log("user is does not exit with this email");
+                request.flash('error',"user is does not exit with this email");
+                return response.redirect('back');
+        }
+            let tokenCheck = await Token.findOne({user:user._id});
+            if(tokenCheck){
+                    tokenCheck.deleteOne();     
+            }else{
+
+          
+            forgetPassword.resetPassword(user);
+            return response.redirect('back'); 
+        }
+
+
+
+       }catch(error){
+           console.log(error);
+           return;
+       }
+
+
+        
+            
+}
+
+
+module.exports.resetform = function(request,response){
+        let tokens = Token.find()
+        return response.render("reset_form",{
+                title:"change password",
+                tokenValid:Token
+        })
+}
+
+
 // module.exports.createSession=function(request , response){
 
 //         request.flash('success','Logged in Successfully');
@@ -240,3 +299,9 @@ module.exports.destroySession=function(request,response){
         
         
 //         };
+
+
+module.exports.newPassword=function(request,response){
+        console.log(request.params.id);
+
+}
