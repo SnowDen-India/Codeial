@@ -1,5 +1,6 @@
 const Post=require("../models/post");
 const User = require('../models/user');
+const Friends = require('../models/friendship');
 
 module.exports.home =  async function(request,response){
     // return response.end("<h1>Express is up for codeil</h1>");
@@ -29,12 +30,13 @@ module.exports.home =  async function(request,response){
 
       // then this
    let users = await User.find({}); 
-
+   let friends = await Friends.find({}); 
     //then this return 
    return response.render('home',{
          title:"Home",
          posts:posts,
-         all_users:users
+         all_users:users,
+         all_friends:friends
    });
 
      }catch(error){

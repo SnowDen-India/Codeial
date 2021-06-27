@@ -1,4 +1,5 @@
 const User=require('../models/user');
+const Friendship = require('../models/friendship');
 const fs = require('fs');
 const path = require('path');
 const { find, deleteOne } = require('../models/user');
@@ -253,6 +254,26 @@ module.exports.resetform = function(request,response){
                 tokenValid:Token
         })
 }
+
+//add friend
+
+module.exports.addFriend = function(request,response){
+        console.log(request.body);
+           let user = User.findOne(request.body.userId);
+           console.log(user.name);
+     
+         let friends=Friendship.create({
+                 from_user:request.body.userId,
+                 to_user:request.body.toUser
+
+         });
+
+        //  user.friendships.push(friends);
+        //  user.save();
+        return response.redirect('back');
+}
+
+
 
 
 // module.exports.createSession=function(request , response){

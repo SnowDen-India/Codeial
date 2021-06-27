@@ -4,11 +4,12 @@ const usersController = require('../controllers/users_controller');
 const passport =require('passport');
 router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
+router.post('/addFriend',passport.checkAuthentication,usersController.addFriend);
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 router.get('/reset-password',usersController.reset);
 router.post('/forget-password',usersController.forget);
-router.get('/:id',usersController.resetform);
+router.get('/passwordReset',usersController.resetform);
 router.post('/newpassword',usersController.newPassword);
 
 router.post('/create',usersController.create);
