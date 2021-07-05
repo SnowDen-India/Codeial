@@ -149,7 +149,7 @@ module.exports.reset= function(request,response)
 module.exports.create=function(request,response){
 
        // check password and confirm password are equal or not;
-            console.log(request.body);
+        //     console.log(request.body);
          if(request.body.password!=request.body.confirm_password){
                  return response.redirect('back');
          }
@@ -258,7 +258,7 @@ module.exports.resetform = function(request,response){
 //add friend
 
 module.exports.addFriend = function(request,response){
-        console.log(request.body);
+        // console.log(request.body);
            let user = User.findOne(request.body.userId);
            console.log(user.name);
      
